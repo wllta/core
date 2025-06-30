@@ -1,0 +1,9 @@
+{
+  "name": "@wallet-analytic/ts-config",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./tsconfig": "./tsconfig.json"
+  }
+}

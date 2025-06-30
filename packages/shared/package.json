@@ -1,0 +1,11 @@
+{
+  "name": "@wallet-analytic/shared",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./types": "./src/types/index.ts",
+    "./utils": "./src/utils/index.ts",
+    "./constants": "./src/constants/index.ts"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "extends": "../../packages/shared/tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "types": ["bun-types"],
+    "baseUrl": ".",
+    "composite": true,
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*", "*.config.ts", "*.config.js"],
+  "exclude": ["node_modules", "dist", "**/*.test.*", "**/*.spec.*"],
+  "references": [
+    {
+      "path": "../../packages/tools/ts-config"
+    }
+  ]
+}

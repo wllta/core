@@ -1,0 +1,15 @@
+{
+  "name": "@wallet-analytic/api",
+  "version": "1.0.50",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "biome format . --write",
+    "dev": "bun run --watch src/index.ts"
+  },
+  "dependencies": {
+    "elysia": "latest",
+    "@wallet-analytic/shared": "workspace:*",
+    "@wallet-analytic/ton-client": "workspace:*"
+  },
+  "module": "src/index.js"
+}

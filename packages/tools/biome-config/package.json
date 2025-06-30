@@ -1,0 +1,9 @@
+{
+  "name": "@wallet-analytic/biome-config",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./biome": "./biome.json"
+  }
+}
