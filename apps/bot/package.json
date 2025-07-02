@@ -2,10 +2,10 @@
   "name": "@wallet-analytic/bot",
   "license": "MIT",
   "version": "0.0.1",
+  "main": "./dist/src/main.js",
   "type": "module",
   "scripts": {
     "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
     "dev": "bun --watch ./src/main.ts",
     "format": "biome format . --write",
     "start": "bun ./src/main.ts"

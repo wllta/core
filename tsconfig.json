@@ -2,10 +2,10 @@
   "files": [],
   "references": [
     {
-      "path": "./packages/tools/ts-config"
+      "path": "./packages/shared"
     },
     {
-      "path": "./packages/shared"
+      "path": "./packages/ton-client"
     },
     {
       "path": "./apps/api"
@@ -16,5 +16,8 @@
     {
       "path": "./apps/bot"
     }
-  ]
+  ],
+  "compilerOptions": {
+    "composite": true
+  }
 }

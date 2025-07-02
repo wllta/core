@@ -1,6 +1,6 @@
 {
-  "name": "@wallet-analytic/ton-client",
-  "main": "./dist/index.js",
+  "name": "@wallet-analytic/db",
+  "module": "./dist/index.js",
   "type": "module",
   "exports": {
     ".": "./dist/index.js"

@@ -1,4 +1,4 @@
-# ts-config
+# db
 
 To install dependencies:
 

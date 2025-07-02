@@ -1,8 +1,8 @@
 import { TelegramClient } from '@mtcute/bun'
 import { Dispatcher, filters } from '@mtcute/dispatcher'
 
-import * as env from './env.ts'
-import { tr } from './i18n/index.ts'
+import * as env from './env'
+import { tr } from './i18n'
 
 const tg = new TelegramClient({
   apiId: env.API_ID,
