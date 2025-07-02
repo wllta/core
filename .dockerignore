@@ -1,0 +1,14 @@
+node_modules
+**/dist
+**/.cache
+Dockerfile
+docker-compose.dev.db.yml
+docker-compose.dev.yml
+.git
+
+*.log
+tmp/
+.vscode/
+.idea/
+
+.env*

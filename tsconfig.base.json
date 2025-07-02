@@ -5,6 +5,10 @@
     "declaration": true,
     "declarationMap": true,
 
+    "inlineSources": true,
+    "sourceMap": true,
+    "incremental": true,
+
     "module": "esnext",
     "target": "ESNext",
     "moduleResolution": "bundler",

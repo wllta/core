@@ -9,7 +9,7 @@
   "exclude": ["node_modules", "dist", "**/*.test.*", "**/*.spec.*"],
   "references": [
     { "path": "../../packages/shared" },
-    { "path": "../../packages/ton-client" }
+    { "path": "../../packages/ton-client" },
     { "path": "../../packages/db" }
   ]
 }

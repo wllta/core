@@ -9,8 +9,7 @@
   "dependencies": {
     "elysia": "latest",
     "@wallet-analytic/shared": "workspace:*",
-    "@wallet-analytic/ton-client": "workspace:*"
+    "@wallet-analytic/ton-client": "workspace:*",
     "@wallet-analytic/db": "workspace:*"
-  },
-  "module": "dist/index.js"
+  }
 }

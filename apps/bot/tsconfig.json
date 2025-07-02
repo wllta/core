@@ -2,14 +2,12 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "inlineSources": true,
-    "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
-    "incremental": true
+    "rootDir": "./src"
   },
-  "include": ["./src"],
-  "exclude": ["**/node_modules"],
+  "include": ["src/**/*", "*.config.ts", "*.config.js"],
+  "exclude": ["node_modules", "dist", "**/*.test.*", "**/*.spec.*"],
   "references": [
-    { "path": "../../packages/shared" }
+    { "path": "../../packages/shared" },
+    { "path": "../../packages/db" }
   ]
 }
