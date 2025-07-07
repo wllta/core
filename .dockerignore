@@ -1,14 +1,17 @@
+.vscode
+.idea
+dist
+build
+coverage*
 node_modules
-**/dist
-**/.cache
-Dockerfile
-docker-compose.dev.db.yml
-docker-compose.dev.yml
+
 .git
+.gitignore
 
-*.log
-tmp/
-.vscode/
-.idea/
-
+Dockerfile*
+docker-compose*
+.dockerignore
 .env*
+README.md
+LICENSE
+Makefile
