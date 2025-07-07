@@ -5,7 +5,6 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
     "dev": "bun --watch ./src/main.ts",
     "format": "biome format . --write",
     "start": "bun ./src/main.ts"
@@ -14,6 +13,7 @@
     "@mtcute/bun": "^0.24.3",
     "@mtcute/dispatcher": "^0.24.3",
     "@mtcute/i18n": "^0.19.0",
-    "@wallet-analytic/shared": "workspace:*"
+    "@wallet-analytic/shared": "workspace:*",
+    "@wallet-analytic/db": "workspace:*"
   }
 }

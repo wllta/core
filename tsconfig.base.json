@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "types": ["bun-types"],
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    "inlineSources": true,
+    "sourceMap": true,
+    "incremental": true,
+
+    "module": "esnext",
+    "target": "ESNext",
+    "moduleResolution": "bundler",
+
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "allowJs": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+
+    "verbatimModuleSyntax": true,
+
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["**/node_modules", "dist", "**/*.test.*", "**/*.spec.*"]
+}

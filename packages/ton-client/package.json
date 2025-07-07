@@ -1,8 +1,8 @@
 {
   "name": "@wallet-analytic/ton-client",
-  "module": "src/index.ts",
+  "main": "./dist/index.js",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./dist/index.js"
   }
 }

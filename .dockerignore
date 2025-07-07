@@ -1,0 +1,17 @@
+.vscode
+.idea
+dist
+build
+coverage*
+node_modules
+
+.git
+.gitignore
+
+Dockerfile*
+docker-compose*
+.dockerignore
+.env*
+README.md
+LICENSE
+Makefile

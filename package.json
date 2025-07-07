@@ -9,6 +9,8 @@
     "dev:api": "bun run --filter=api dev",
     "dev:bot": "bun run --filter=bot dev",
 
+    "build:tsc": "tsc --build",
+
     "build": "bun run --filter=web build && bun run --filter=api build && bun run --filter=bot build",
     "build:web": "bun run --filter=web build",
     "build:api": "bun run --filter=api build",
@@ -21,7 +23,6 @@
     "db:migrate": "bun run --filter=api db:migrate",
 
     "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules",
-    "type-check": "bun run --filter=web type-check && bun run --filter=api type-check",
 
     "format": "biome format . --write",
     "checkAll": "biome check . --write --unsafe"
@@ -31,6 +32,6 @@
     "@biomejs/biome": "^1.9.4"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^5.8.3"
   }
 }
