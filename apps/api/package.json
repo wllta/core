@@ -7,9 +7,10 @@
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
-    "elysia": "latest",
+    "@wallet-analytic/db": "workspace:*",
     "@wallet-analytic/shared": "workspace:*",
     "@wallet-analytic/ton-client": "workspace:*",
-    "@wallet-analytic/db": "workspace:*"
+    "effect": "^3.16.12",
+    "elysia": "latest"
   }
 }

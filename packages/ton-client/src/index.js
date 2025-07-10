@@ -1,1 +1,2 @@
-export const a = {}
+export const a = {};
+//# sourceMappingURL=index.js.map
