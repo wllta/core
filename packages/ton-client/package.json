@@ -2,6 +2,10 @@
   "name": "@wallet-analytic/ton-client",
   "main": "./dist/index.js",
   "type": "module",
+  "scripts": {
+    "format": "biome format web --write",
+    "checkAll": "biome check web --write --unsafe"
+  },
   "exports": {
     ".": "./dist/index.js"
   }

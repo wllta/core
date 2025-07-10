@@ -6,6 +6,8 @@
     ".": "./dist/index.js"
   },
   "scripts": {
-    "build": "bun build src/index.ts --outdir dist --format esm"
+    "build": "bun build src/index.ts --outdir dist --format esm",
+    "format": "biome format web --write",
+    "checkAll": "biome check web --write --unsafe"
   }
 }
