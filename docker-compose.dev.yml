@@ -67,13 +67,20 @@ services:
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_FEATURE_TOGGLES_ENABLE=tempoSearch,tempoServiceGraph
     volumes:
-      - otel-data:/var/lib/grafana
+      - otel-data-grafana:/var/lib/grafana
+      - otel-data-prometheus:/prometheus
+      - otel-data-tempo:/var/tempo
+      - otel-data-loki:/loki
     networks:
       - otel-net
     restart: unless-stopped
 
 volumes:
   otel-data:
+  otel-data-grafana:
+  otel-data-prometheus:
+  otel-data-tempo:
+  otel-data-loki:
   api_node_modules:
   bot_node_modules:
   web_node_modules:

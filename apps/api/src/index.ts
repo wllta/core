@@ -1,15 +1,21 @@
 import { Elysia } from 'elysia'
-import { Effect } from 'effect'
 
-const main = Effect.sync(() => {
-  const app = new Elysia()
-    .get('/', () => 'Hello Elysia')
-    .get('/health', () => ({ ts: Date.now() }))
-    .listen(3001)
+import { errorHandler } from './errors/handler'
 
+import { openTelemetryPlugin, corsPlugin, swaggerPlugin } from './config'
+
+import { userModule } from './modules/user'
+
+const app = new Elysia()
+  .use(openTelemetryPlugin)
+  .use(corsPlugin)
+  .use(swaggerPlugin)
+  .onError(errorHandler)
+  .get('/health', () => 'Hello Elysia')
+  .use(userModule)
+
+app.listen(3001, () => {
   console.log(
-    `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`,
+    `🦊 Server running at ${app.server?.hostname}:${app.server?.port}`,
   )
 })
-
-Effect.runSync(main)
