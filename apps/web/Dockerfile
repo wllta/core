@@ -5,22 +5,22 @@ RUN apt-get update && apt-get install -y curl
 
 FROM base AS deps
 
-COPY bun.lock package.json ./
+COPY package.json bun.lock ./
 
-COPY packages/shared/package.json ./packages/shared/package.json
-COPY apps/web/package.json ./apps/web/package.json
+COPY packages/*/package.json ./packages/
+COPY apps/*/package.json ./apps/
 
 RUN bun install
 
 FROM base AS builder
 
 COPY --from=deps /app/node_modules ./node_modules
-COPY apps/web ./apps/web
-COPY packages ./packages
+COPY . .
 
 FROM base AS prod
 
-COPY --from=deps /app/node_modules ./node_modules
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/apps/web ./apps/web
 
 WORKDIR /app/apps/web
 CMD ["bun", "run", "dev"]
