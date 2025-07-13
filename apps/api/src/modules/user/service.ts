@@ -1,6 +1,6 @@
 import { record } from '@elysiajs/opentelemetry'
 
-import { ForbiddenError, NotFoundError } from '../../errors/internal'
+import { ForbiddenError, NotFoundError } from '@wallet-analytic/shared'
 
 export const userService = {
   async getUser(userId: number) {

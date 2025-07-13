@@ -1,16 +1,25 @@
 import { record } from '@elysiajs/opentelemetry'
 
-import type { ErrorResponse } from './type'
-import { ApiError } from './errors'
+import type { HTTPHeaders, StatusMap } from 'elysia'
+import type { ElysiaCookie } from 'elysia/cookies'
+
+import { ApiError, type ErrorResponse } from '@wallet-analytic/shared'
 
 interface Params {
   error: unknown
-  set: any
+  set: {
+    headers: HTTPHeaders
+    status?: number | keyof StatusMap
+    redirect?: string
+    cookie?: Record<string, ElysiaCookie>
+  }
 }
 
 export const errorHandler = ({ error, set }: Params): ErrorResponse => {
   const isDev = process.env.NODE_ENV === 'development'
   let apiError: ApiError
+
+  console.log('error', error)
 
   if (error instanceof ApiError) {
     apiError = error
