@@ -1,10 +1,10 @@
-import { Elysia } from 'elysia'
 import { opentelemetry } from '@elysiajs/opentelemetry'
+import { Elysia } from 'elysia'
 
-import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-node'
-import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-proto'
 import { OTLPMetricExporter } from '@opentelemetry/exporter-metrics-otlp-proto'
+import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-proto'
 import { PeriodicExportingMetricReader } from '@opentelemetry/sdk-metrics'
+import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-node'
 
 const metricReader = new PeriodicExportingMetricReader({
   exporter: new OTLPMetricExporter(),
