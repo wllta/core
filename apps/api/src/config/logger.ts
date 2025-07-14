@@ -39,7 +39,4 @@ export const logger = winston.createLogger({
   ],
 })
 
-export const loggerPlugin = () =>
-  new Elysia().decorate('logger', logger).onRequest(({ logger, request }) => {
-    logger.info(`Incoming request: ${request.method} ${request.url}`)
-  })
+export const loggerPlugin = new Elysia().decorate('logger', logger)

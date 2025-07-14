@@ -4,7 +4,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "biome format . --write",
-    "build": "bun build src/index.ts --compile --minify --outfile server --target bun",
+    "build:compile": "bun build src/index.ts --compile --minify --outfile server --target bun",
+    "build": "bun build src/index.ts --minify --outdir dist --target bun",
     "dev": "bun run --watch src/index.ts",
     "start": "bun run dist/index.js"
   },

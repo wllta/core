@@ -1,34 +1,37 @@
 import { Elysia } from 'elysia'
 
-import { ForbiddenError } from '@wallet-analytic/shared'
-
+import { loggerPlugin } from '../../config/logger'
 import { AuthPlugin } from '../../middlewares/auth'
 
-import { UserModel } from './model'
+import { GetUserModel } from './model'
 import { userService } from './service'
 
 export const userModule = new Elysia({ prefix: '/user' })
+  .use(loggerPlugin)
   .use(AuthPlugin)
-  .use(UserModel)
+  .use(GetUserModel)
   .get(
     '/:id',
-    async ({ params, Auth: { user } }) => {
+    async ({ params, user }) => {
       console.log('user', user)
       return userService.getUser(Number(params.id))
     },
     {
       response: 'user.getUserResponse',
+      detail: {
+        tags: ['User'],
+      },
     },
   )
   .get(
     '/all',
-    async ({ Auth: { user } }) => {
-      console.log('user', user)
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      throw new ForbiddenError('Access denied')
-      return userService.getUser(1)
+    async ({ user }) => {
+      return userService.getUser(user.id)
     },
     {
       response: 'user.getUserResponse',
+      detail: {
+        tags: ['User'],
+      },
     },
   )

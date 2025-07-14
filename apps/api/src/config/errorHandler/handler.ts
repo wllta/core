@@ -2,6 +2,8 @@ import { record } from '@elysiajs/opentelemetry'
 
 import { ApiError, type ErrorResponse } from '@wallet-analytic/shared'
 
+import { logger } from '../logger'
+
 export const errorHandler = ({ error }: { error: unknown }): ErrorResponse => {
   const isDev = process.env.NODE_ENV === 'development'
   let apiError: ApiError
@@ -22,6 +24,8 @@ export const errorHandler = ({ error }: { error: unknown }): ErrorResponse => {
       span.setAttribute('error.details', JSON.stringify(apiError.details))
     }
   })
+
+  logger.error(apiError)
 
   return {
     error: {

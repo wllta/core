@@ -11,9 +11,7 @@ export const AuthPlugin = new Elysia()
     }
 
     return {
-      Auth: {
-        user: await getUser(bearer),
-      },
+      user: await getUser(bearer),
     }
   })
 
