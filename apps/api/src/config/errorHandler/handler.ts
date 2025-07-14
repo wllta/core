@@ -1,6 +1,10 @@
 import { record } from '@elysiajs/opentelemetry'
 
-import { ApiError, type ErrorResponse } from '@wallet-analytic/shared'
+import {
+  type ErrorResponse,
+  ApiError,
+  InternalServerError,
+} from '@wallet-analytic/shared'
 
 import { logger } from '../logger'
 
@@ -11,7 +15,7 @@ export const errorHandler = ({ error }: { error: unknown }): ErrorResponse => {
   if (error instanceof ApiError) {
     apiError = error
   } else {
-    apiError = new ApiError(500, 'INTERNAL_ERROR', 'Internal Server Error')
+    apiError = new InternalServerError()
   }
 
   record('error.handler', (span) => {
@@ -20,6 +24,7 @@ export const errorHandler = ({ error }: { error: unknown }): ErrorResponse => {
       'error.code': apiError.code,
       'error.message': apiError.message,
     })
+
     if (apiError.details) {
       span.setAttribute('error.details', JSON.stringify(apiError.details))
     }

@@ -34,8 +34,8 @@ export class ValidationError extends ApiError {
   }
 }
 
-export class DatabaseError extends ApiError {
-  constructor(message = 'Database Error', details?: unknown) {
-    super(500, 'DATABASE_ERROR', message, details)
+export class InternalServerError extends ApiError {
+  constructor(message = 'Internal server error', details?: unknown) {
+    super(500, 'INTERNAL_ERROR', message, details)
   }
 }
