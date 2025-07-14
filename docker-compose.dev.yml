@@ -21,7 +21,7 @@ services:
       - otel-net
     restart: unless-stopped
     healthcheck:
-      test: [ "CMD-SHELL", "curl -f http://127.0.0.1:3001/health || exit 1" ]
+      test: [ "CMD-SHELL", "curl -f http://${API_HOST}:${API_PORT}/health || exit 1" ]
       interval: 30s
       timeout: 10s
       retries: 3

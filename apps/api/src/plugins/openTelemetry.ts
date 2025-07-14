@@ -11,7 +11,9 @@ const metricReader = new PeriodicExportingMetricReader({
   exportIntervalMillis: 1000,
 })
 
-export const openTelemetryPlugin = new Elysia().use(
+export const openTelemetryPlugin = new Elysia({
+  name: 'wa-open-telemetry',
+}).use(
   opentelemetry({
     spanProcessors: [new BatchSpanProcessor(new OTLPTraceExporter())],
     metricReader,

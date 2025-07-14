@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "bunx concurrently -n web,api,bot -c blue,green,magenta \"bun run --filter=@wallet-analytic/web dev\" \"bun run --filter=@wallet-analytic/api dev\" \"bun run --filter=@wallet-analytic/bot dev\"",
 
-    "docker:rebuild": "bunx docker compose -f docker-compose.dev.yml down -v && docker compose -f docker-compose.dev.yml up --build",
+    "docker:rebuild": "bunx docker compose -f docker-compose.dev.yml down && docker compose -f docker-compose.dev.yml build --no-cache && docker compose -f docker-compose.dev.yml up",
+    "docker:rebuild:cached": "bunx docker compose -f docker-compose.dev.yml down && docker compose -f docker-compose.dev.yml build && docker compose -f docker-compose.dev.yml up",
 
     "build:tsc": "tsc --build",
     "build": "bunx concurrently -n web,api,bot -c blue,green,magenta \"bun run --filter=@wallet-analytic/web build\" \"bun run --filter=@wallet-analytic/api build\" \"bun run --filter=@wallet-analytic/bot build\"",
