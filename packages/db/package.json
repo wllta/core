@@ -3,7 +3,7 @@
   "module": "./dist/index.js",
   "type": "module",
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./src/index.ts"
   },
   "scripts": {
     "build": "bun build src/index.ts --outdir dist --format esm",

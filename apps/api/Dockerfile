@@ -3,21 +3,12 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y curl
 
-FROM base AS deps
-
-COPY bun.lock package.json ./
-
-COPY packages/shared/package.json ./packages/shared/
-COPY packages/db/package.json ./packages/db/
-COPY packages/ton-client/package.json ./packages/ton-client/
-
-COPY apps/api/package.json ./apps/api/
-
-RUN bun install
-
 FROM base AS dev
 
-COPY --from=deps /app/node_modules ./node_modules
+COPY package.json bun.lock ./
+
+COPY packages ./packages
+COPY apps/api ./apps/api
 
 WORKDIR /app/apps/api
 

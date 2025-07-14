@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     server: {
       hmr: {
         protocol: 'ws',
-        host: 'localhost',
+        host: '0.0.0.0',
         port: 24678,
       },
     },
