@@ -7,6 +7,7 @@ import { client } from '~/shared/api'
 interface AuthState {
   user: TMAUser | null
   loading: boolean
+  initialized: boolean
   error: string | null
 }
 
@@ -15,6 +16,7 @@ export const useAuthStore = defineStore('auth', {
     user: null,
     loading: false,
     error: null,
+    initialized: false,
   }),
 
   getters: {
@@ -23,25 +25,26 @@ export const useAuthStore = defineStore('auth', {
 
   actions: {
     async initialize(): Promise<void> {
-      console.log('import.meta.client', import.meta.client)
-      if (!import.meta.client) {
+      if (this.initialized || !import.meta.client) {
         return
       }
 
       this.loading = true
+      this.error = null
 
       try {
+        await new Promise((resolve) => setTimeout(resolve, 3_000))
         const { data: user } = await client.auth.login.get()
 
-        console.log('data', user)
         if (user) {
           this.user = user
         }
-      } catch (err: unknown) {
+      } catch (err) {
         this.error =
           err instanceof Error ? err.message : 'Unknown error occurred'
       } finally {
         this.loading = false
+        this.initialized = true
       }
     },
   },

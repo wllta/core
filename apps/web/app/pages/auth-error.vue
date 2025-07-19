@@ -1,25 +1,32 @@
 <template>
-  <div class="min-h-screen flex flex-col items-center justify-center p-4">
-    <h1 class="text-2xl font-bold mb-4">Ошибка авторизации</h1>
-    <p class="mb-6 text-center">Не удалось войти через Telegram. Пожалуйста, попробуйте снова.</p>
+  <div class="flex items-center justify-center h-screen">
+    <UCard>
+      <template #header>
+        <h2 class="text-xl font-semibold text-red-500">Ошибка авторизации</h2>
+      </template>
 
-    <button
-        @click="retryAuth"
-        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-    >
-      Попробовать снова
-    </button>
+      <p>{{ auth.error }}</p>
+
+      <template #footer>
+        <UButton
+            @click="retryAuth"
+            color="primary"
+            block
+        >
+          Повторить попытку
+        </UButton>
+      </template>
+    </UCard>
   </div>
 </template>
 
 <script setup lang="ts">
-const authStore = useAuthStore()
-const router = useRouter()
+const auth = useAuthStore()
 
 const retryAuth = async () => {
-  await authStore.initialize()
-  if (authStore.isAuthenticated) {
-    await router.push('/')
+  await auth.initialize()
+  if (auth.isAuthenticated) {
+    await navigateTo('/home')
   }
 }
 </script>

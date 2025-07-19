@@ -1,30 +1,54 @@
 <template>
-  <div>
-    <NuxtPage/>
-<!--    <ClientOnly>-->
-<!--      <div v-if="authStore.loading" class="fixed inset-0 flex items-center justify-center bg-white/80 z-50">-->
-<!--        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>-->
-<!--      </div>-->
-<!--    </ClientOnly>-->
+  <div class="relative min-h-screen">
+    <AppLoader
+        v-if="showLoader"
+        :blocking="true"
+        text="App is loading..."
+    />
+
+    <ClientOnly>
+      <template v-if="!showLoader && !auth.error">
+        <NuxtLayout>
+          <NuxtPage />
+        </NuxtLayout>
+      </template>
+    </ClientOnly>
   </div>
 </template>
 
 <script setup lang="ts">
-import { init, postEvent, targetOrigin } from '@telegram-apps/sdk-vue'
+import { ref, computed } from 'vue'
+import { postEvent, targetOrigin } from '@telegram-apps/sdk-vue'
 
-const authStore = useAuthStore()
-targetOrigin.set('https://tgl.mini-apps.store')
-postEvent('web_app_ready')
-// postEvent('web_app_expand')
-// init()
+import AppLoader from '~/components/ui/AppLoader.vue'
 
-onMounted(() => {
+const auth = useAuthStore()
+const isLoading = ref(true)
+
+const showLoader = computed(() => auth.loading || isLoading.value)
+
+onMounted(async () => {
   try {
-    init()
-  } catch (e) {
-    console.log(e)
-  }
+    targetOrigin.set('https://tgl.mini-apps.store')
+    postEvent('web_app_ready')
 
-  authStore.initialize()
+    await auth.initialize()
+  } catch (error) {
+    console.error('initialize error:', error)
+  } finally {
+    isLoading.value = false
+  }
 })
 </script>
+
+<style>
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+</style>

@@ -6,7 +6,13 @@ export default (<RouterConfig>{
       path: '/',
       name: 'index',
       component: () => import('./pages/index.vue'),
-      meta: { requiresAuth: true },
+      meta: { middleware: ['auth'] },
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: () => import('./pages/home.vue'),
+      meta: { middleware: ['auth'] },
     },
     {
       path: '/auth-error',
