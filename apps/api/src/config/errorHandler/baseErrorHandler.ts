@@ -1,3 +1,4 @@
+import { NotFoundError } from 'elysia'
 import { record } from '@elysiajs/opentelemetry'
 
 import {
@@ -8,11 +9,28 @@ import {
 
 import { logger } from '../logger'
 
-export const errorHandler = ({ error }: { error: unknown }): ErrorResponse => {
+type ErrorCode =
+  | number
+  | 'UNKNOWN'
+  | 'NOT_FOUND'
+  | 'PARSE'
+  | 'INTERNAL_SERVER_ERROR'
+  | 'INVALID_COOKIE_SIGNATURE'
+  | 'INVALID_FILE_TYPE'
+
+export const baseErrorHandler = (
+  error: unknown,
+  code: ErrorCode,
+): ErrorResponse => {
   const isDev = process.env.NODE_ENV === 'development'
   let apiError: ApiError
+  console.log('code', code)
 
-  if (error instanceof ApiError) {
+  // todo: add better type check and handler
+
+  if (code === 'NOT_FOUND') {
+    apiError = new NotFoundError()
+  } else if (error instanceof ApiError) {
     apiError = error
   } else {
     apiError = new InternalServerError()

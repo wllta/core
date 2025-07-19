@@ -28,11 +28,11 @@ export class NotFoundError extends ApiError {
   }
 }
 
-export class ValidationError extends ApiError {
-  constructor(message = 'Validation Failed', details?: unknown) {
-    super(422, 'VALIDATION_ERROR', message, details)
-  }
-}
+// export class ValidationError extends ApiError {
+//   constructor(message = 'Validation Failed', details?: unknown) {
+//     super(422, 'VALIDATION_ERROR', message, details)
+//   }
+// }
 
 export class InternalServerError extends ApiError {
   constructor(message = 'Internal server error', details?: unknown) {

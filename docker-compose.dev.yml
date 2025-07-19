@@ -27,29 +27,30 @@ services:
       retries: 3
       start_period: 10s
 
-  wa-web:
-    build:
-      context: .
-      dockerfile: apps/web/Dockerfile
-    volumes:
-      - ./apps/web:/app/apps/web
-      # failed to load native binding
-      # - ./node_modules:/app/node_modules
-      - ./package.json:/app/package.json
-      - ./bun.lock:/app/bun.lock
-      - ./packages:/app/packages
-    ports:
-      - "3000:3000"
-      - "24678:24678"
-    env_file:
-      - .env.development.local
-    restart: unless-stopped
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:3000/health" ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 30s
+#  wa-web:
+#    build:
+#      context: .
+#      dockerfile: apps/web/Dockerfile
+#    volumes:
+#      - ./apps/web/certs:/app/apps/web/certs:ro
+#      - ./apps/web:/app/apps/web
+#      # failed to load native binding
+#      # - ./node_modules:/app/node_modules
+#      - ./package.json:/app/package.json
+#      - ./bun.lock:/app/bun.lock
+#      - ./packages:/app/packages
+#    ports:
+#      - "3000:3000"
+#      - "24678:24678"
+#    env_file:
+#      - .env.development.local
+#    restart: unless-stopped
+#    healthcheck:
+#      test: [ "CMD", "curl", "-f", "http://localhost:3000/health" ]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 3
+#      start_period: 30s
 
   wa-bot:
     build:

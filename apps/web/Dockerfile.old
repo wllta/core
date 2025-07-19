@@ -1,0 +1,51 @@
+#FROM oven/bun:latest AS base
+#WORKDIR /app
+#
+#RUN apt-get update && apt-get install -y curl
+#
+#FROM base AS deps
+#
+#COPY package.json bun.lock ./
+#
+#COPY packages/shared/package.json ./packages/shared/
+#COPY packages/db/package.json ./packages/db/
+#COPY packages/ton-client/package.json ./packages/ton-client/
+##COPY apps/*/package.json ./apps/
+#
+#COPY apps/web/package.json ./apps/web/
+#COPY apps/api/package.json ./apps/api/
+#
+#RUN bun install
+#
+#FROM base AS builder
+#
+#COPY --from=deps /app/node_modules ./node_modules
+#COPY . .
+#
+#FROM base AS prod
+#
+#COPY --from=builder /app/node_modules ./node_modules
+#COPY --from=builder /app/apps/web ./apps/web
+#
+#WORKDIR /app/apps/web
+#
+#EXPOSE 3000/tcp
+#
+#CMD ["bun", "run", "dev"]
+#
+##https://content.nuxt.com/docs/deploy/docker#with-bun-image
+
+#FROM oven/bun:latest AS base
+#WORKDIR /app
+#
+#RUN apt-get update && apt-get install -y curl
+#
+#FROM base AS dev
+#
+#COPY packages ./packages
+#COPY apps/web ./apps/web
+#COPY package.json bun.lock ./
+#
+#WORKDIR /app/apps/web
+#
+#CMD ["bun", "run", "dev"]

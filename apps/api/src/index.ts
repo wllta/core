@@ -4,23 +4,26 @@ import { corsPlugin, openTelemetryPlugin, swaggerPlugin } from './plugins'
 
 import { loggerPlugin } from './config/logger'
 import { env } from './config/env'
-import { errorHandler } from './config/errorHandler'
+import { baseErrorHandler, handleValidationError } from './config/errorHandler'
 
-import { userModule } from './modules/user'
+import { authModule } from './modules/auth'
 
 const app = new Elysia()
   .use(loggerPlugin)
   .use(openTelemetryPlugin)
   .use(corsPlugin)
   .use(swaggerPlugin)
-  .onError(errorHandler)
-  .get('/health', 'Hello Elysia')
-  .use(userModule)
+  .onError(({ error, code }) => {
+    if (code === 'VALIDATION') {
+      return handleValidationError(error)
+    }
 
-app.listen(env.APP_PORT, () => {
-  console.log(
-    `🦊 Server running at ${app.server?.hostname}:${app.server?.port}`,
-  )
-})
+    return baseErrorHandler(error, code)
+  })
+  .get('/health', 'Hello Elysia')
+  .use(authModule)
+  .listen(env.APP_PORT)
+
+console.log(`🦊 Server running at ${app.server?.hostname}:${app.server?.port}`)
 
 export type App = typeof app

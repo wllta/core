@@ -21,6 +21,7 @@
     "@opentelemetry/sdk-trace-base": "^2.0.1",
     "@opentelemetry/sdk-trace-node": "^2.0.1",
     "@opentelemetry/sdk-trace-web": "^2.0.1",
+    "@telegram-apps/init-data-node": "^2.0.10",
     "@wallet-analytic/db": "workspace:*",
     "@wallet-analytic/shared": "workspace:*",
     "@wallet-analytic/ton-client": "workspace:*",
