@@ -1,26 +1,18 @@
 FROM oven/bun:latest AS base
 WORKDIR /app
 
-FROM base AS deps
+RUN apt-get update && apt-get install -y curl openssl
 
-COPY bun.lock ./
-COPY package.json ./
-COPY apps/web/package.json ./apps/web/package.json
-COPY packages/shared/package.json ./packages/shared/package.json
+COPY package.json bun.lock ./
+COPY packages ./packages
+
+COPY apps/api/package.json ./apps/api/package.json
+COPY apps/web/package.json ./apps/web/
 
 RUN bun install
 
-FROM base AS builder
-
-COPY --from=deps /app/node_modules ./node_modules
-COPY apps/web ./apps/web
-COPY packages ./packages
-
-FROM base AS prod
-ENV NODE_ENV=production
-
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=builder /app .
+COPY . .
 
 WORKDIR /app/apps/web
+
 CMD ["bun", "run", "dev"]

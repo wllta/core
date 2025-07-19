@@ -1,28 +1,15 @@
 FROM oven/bun:latest AS base
 WORKDIR /app
 
-FROM base AS deps
+RUN apt-get update && apt-get install -y curl
 
-COPY bun.lock ./
-COPY package.json ./
-COPY apps/api/package.json ./apps/api/package.json
-COPY packages/shared/package.json ./packages/shared/package.json
-COPY packages/ton-client/package.json ./packages/ton-client/package.json
-COPY packages/db/package.json ./packages/db/package.json
+FROM base AS dev
 
-RUN bun install
+COPY package.json bun.lock ./
 
-FROM base AS builder
-
-COPY --from=deps /app/node_modules ./node_modules
-COPY apps/api ./apps/api
 COPY packages ./packages
-
-FROM base AS prod
-ENV NODE_ENV=production
-
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=builder /app .
+COPY apps/api ./apps/api
 
 WORKDIR /app/apps/api
+
 CMD ["bun", "run", "dev"]
