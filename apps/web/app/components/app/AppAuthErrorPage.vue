@@ -2,18 +2,19 @@
   <div class="flex items-center justify-center h-screen">
     <UCard>
       <template #header>
-        <h2 class="text-xl font-semibold text-red-500">Ошибка авторизации</h2>
+        <h2 class="text-xl font-semibold text-primary-500 text-center">Auth error</h2>
       </template>
 
-      <p>{{ auth.error }}</p>
+      <p class="text-secondary">{{error}}</p>
 
       <template #footer>
         <UButton
-            @click="retryAuth"
+            @click="$emit('retry')"
             color="primary"
             block
+            :loading="auth.loading"
         >
-          Повторить попытку
+          Login again
         </UButton>
       </template>
     </UCard>
@@ -23,10 +24,12 @@
 <script setup lang="ts">
 const auth = useAuthStore()
 
-const retryAuth = async () => {
-  await auth.initialize()
-  if (auth.isAuthenticated) {
-    await navigateTo('/home')
-  }
-}
+defineProps({
+  error: {
+    type: [String, Error],
+    default: 'A we inside telegram?',
+  },
+})
+
+defineEmits(['retry'])
 </script>

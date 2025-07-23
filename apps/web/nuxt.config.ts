@@ -1,19 +1,4 @@
 export default defineNuxtConfig({
-  // routeRules: {
-  //   '/': { ssr: false },
-  //   '/home': { ssr: false, prerender: false },
-  //   '/auth-error': { ssr: false },
-  // },
-  app: {
-    pageTransition: {
-      name: 'fade',
-      mode: 'out-in', // default
-    },
-    layoutTransition: {
-      name: 'slide',
-      mode: 'out-in', // default
-    },
-  },
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
   vite: {
@@ -39,4 +24,10 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
   ],
   css: ['~/assets/css/main.css'],
+
+  // router: {
+  //   options: {
+  //     hashMode: true,
+  //   },
+  // },
 })

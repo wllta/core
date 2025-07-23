@@ -1,54 +1,67 @@
 <template>
-  <div class="relative min-h-screen">
+  <UApp>
     <AppLoader
         v-if="showLoader"
-        :blocking="true"
-        text="App is loading..."
     />
 
-    <ClientOnly>
-      <template v-if="!showLoader && !auth.error">
-        <NuxtLayout>
-          <NuxtPage />
-        </NuxtLayout>
-      </template>
+    <AppAuthErrorPage
+        v-else-if="auth.error"
+        :error="auth.error"
+        @retry="retryAuth"
+    />
+
+    <ClientOnly v-else>
+      <NuxtLayout>
+        <NuxtPage/>
+      </NuxtLayout>
     </ClientOnly>
-  </div>
+  </UApp>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { postEvent, targetOrigin } from '@telegram-apps/sdk-vue'
+import { withCatch } from '@wallet-analytic/shared'
+import { init } from '~/core/init'
 
-import AppLoader from '~/components/ui/AppLoader.vue'
+import './core/mockEnv.ts'
 
 const auth = useAuthStore()
 const isLoading = ref(true)
 
 const showLoader = computed(() => auth.loading || isLoading.value)
 
-onMounted(async () => {
+const retryAuth = async () => {
+  isLoading.value = true
   try {
-    targetOrigin.set('https://tgl.mini-apps.store')
-    postEvent('web_app_ready')
+    await auth.initialize()
+  } finally {
+    isLoading.value = false
+  }
+}
 
+watch(
+  () => auth.error,
+  (newVal, oldVal) => {
+    console.log('Error changed:', newVal)
+    console.log('Error oldVal:', oldVal)
+  },
+)
+
+const hasInitialized = ref(false)
+
+onMounted(async () => {
+  if (hasInitialized.value) {
+    return
+  }
+
+  hasInitialized.value = true
+
+  try {
+    await init()
     await auth.initialize()
   } catch (error) {
-    console.error('initialize error:', error)
+    console.error('Initialization failed:', error)
   } finally {
     isLoading.value = false
   }
 })
 </script>
-
-<style>
-.page-enter-active,
-.page-leave-active {
-  transition: all 0.4s;
-}
-.page-enter-from,
-.page-leave-to {
-  opacity: 0;
-  filter: blur(1rem);
-}
-</style>
