@@ -1,6 +1,7 @@
 import {
   bindThemeParamsCssVars,
   bindViewportCssVars,
+  closingBehavior,
   init as initSDK,
   isThemeParamsCssVarsBound,
   isViewportCssVarsBound,
@@ -47,6 +48,14 @@ export async function init(): Promise<void> {
   }
 
   restoreInitData()
+
+  if (closingBehavior.mount.isAvailable()) {
+    closingBehavior.mount()
+  }
+
+  if (closingBehavior.enableConfirmation.isAvailable()) {
+    closingBehavior.enableConfirmation()
+  }
 
   mountBackButton.ifAvailable()
   mountSettingsButton.ifAvailable()

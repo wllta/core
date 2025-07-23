@@ -19,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import { withCatch } from '@wallet-analytic/shared'
 import { init } from '~/core/init'
 
 import './core/mockEnv.ts'

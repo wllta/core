@@ -1,3 +1,16 @@
+<script setup lang="ts">
+const auth = useAuthStore()
+
+defineProps({
+  error: {
+    type: [String, Error],
+    default: 'A we inside telegram?',
+  },
+})
+
+defineEmits(['retry'])
+</script>
+
 <template>
   <div class="flex items-center justify-center h-screen">
     <UCard>
@@ -21,15 +34,3 @@
   </div>
 </template>
 
-<script setup lang="ts">
-const auth = useAuthStore()
-
-defineProps({
-  error: {
-    type: [String, Error],
-    default: 'A we inside telegram?',
-  },
-})
-
-defineEmits(['retry'])
-</script>

@@ -1,3 +1,18 @@
+<script setup lang="ts">
+withDefaults(
+  defineProps<{
+    text?: string
+    progressClass?: string
+    textClass?: string
+  }>(),
+  {
+    text: 'App is loading...',
+    progressClass: 'w-64',
+    textClass: '',
+  },
+)
+</script>
+
 <template>
   <div
       class="fixed inset-0 z-[9999] flex flex-col items-center justify-center backdrop-blur-sm pointer-events-none"
@@ -18,17 +33,3 @@
   </div>
 </template>
 
-<script setup lang="ts">
-withDefaults(
-  defineProps<{
-    text?: string
-    progressClass?: string
-    textClass?: string
-  }>(),
-  {
-    text: 'App is loading...',
-    progressClass: 'w-64',
-    textClass: '',
-  },
-)
-</script>

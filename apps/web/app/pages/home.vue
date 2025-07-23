@@ -1,7 +1,13 @@
+<script setup lang="ts">
+const auth = useAuthStore()
+
+const goHome = () => {
+  navigateTo('/')
+}
+</script>
+
 <template>
-  <UiPage
-      @back="goBack"
-  >
+  <UiPage :back="true">
     <div class="flex items-center justify-center">
       <UCard class="w-full max-w-md">
         <template #header>
@@ -26,12 +32,3 @@
   </UiPage>
 </template>
 
-<script setup lang="ts">
-const auth = useAuthStore()
-const goBack = () => {
-  navigateTo('/')
-}
-const goHome = () => {
-  navigateTo('/')
-}
-</script>
