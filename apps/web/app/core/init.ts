@@ -77,5 +77,14 @@ export async function init(): Promise<void> {
     bindThemeParamsCssVars()
   }
 
+  const bgColor = miniApp.isDark() ? '#242424' : '#ffeaa166'
+
+  miniApp.setBackgroundColor(bgColor)
+  miniApp.setHeaderColor(bgColor)
+  miniApp.setBottomBarColor(bgColor)
+
+  const colorMode = useColorMode()
+  colorMode.preference = miniApp.isDark() ? 'dark' : 'light'
+
   console.log('[init] Initialization complete')
 }

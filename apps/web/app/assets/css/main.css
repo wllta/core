@@ -19,6 +19,9 @@
   --color-secondary-500: #9f815b;
   --color-info-500: #50968a;
   --color-error-500: #c27271;
+
+  --color-brand-light: #ffeaa166;
+  --color-brand-dark: #242424;
 }
 
 :root {
@@ -26,12 +29,14 @@
 
   --ui-primary: var(--color-primary-500);
   --ui-secondary: var(--color-secondary-500);
-  /*--ui-success: var(--color-primary-500);*/
   --ui-success: var(--color-primary-500);
   --ui-info: #457f67;
   --ui-warning: #facc15;
   --ui-error: var(--color-error-500);
 
-  /*--ui-background: #242424;*/
-  --ui-background: #ffffff;
+  --ui-background: var(--color-brand-light);
+}
+
+.dark {
+  --ui-background: var(--color-brand-dark);
 }

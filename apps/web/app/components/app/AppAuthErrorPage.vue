@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { getCurrentInstance } from 'vue'
 const auth = useAuthStore()
 
 defineProps({
@@ -9,18 +10,21 @@ defineProps({
 })
 
 defineEmits(['retry'])
+
+const instance = getCurrentInstance()
+const hasRetryListener = instance?.vnode.props?.onRetry !== undefined
 </script>
 
 <template>
   <div class="flex items-center justify-center h-screen">
     <UCard>
       <template #header>
-        <h2 class="text-xl font-semibold text-primary-500 text-center">Auth error</h2>
+        <h2 class="text-xl font-semibold text-primary-500 text-center">Core service error</h2>
       </template>
 
-      <p class="text-secondary">{{error}}</p>
+      <p class="text-secondary">{{ error }}</p>
 
-      <template #footer>
+      <template #footer v-if="hasRetryListener">
         <UButton
             @click="$emit('retry')"
             color="primary"
@@ -33,4 +37,3 @@ defineEmits(['retry'])
     </UCard>
   </div>
 </template>
-

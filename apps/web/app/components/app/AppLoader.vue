@@ -1,16 +1,22 @@
 <script setup lang="ts">
-withDefaults(
+const { t } = useI18n()
+
+const props = withDefaults(
   defineProps<{
     text?: string
     progressClass?: string
     textClass?: string
   }>(),
   {
-    text: 'App is loading...',
+    text: '',
     progressClass: 'w-64',
     textClass: '',
   },
 )
+
+const defaultText = t('loading')
+const loadingText = computed(() => (props.text ? props.text : defaultText))
+console.log('loadingText', loadingText.value)
 </script>
 
 <template>
@@ -22,14 +28,13 @@ withDefaults(
         :class="progressClass"
     />
     <span
-        v-if="text"
+        v-if="loadingText"
         class="text-sm font-medium"
         :class="textClass"
     >
-      {{ text }}
+      {{ loadingText }}
     </span>
 
     <slot />
   </div>
 </template>
-

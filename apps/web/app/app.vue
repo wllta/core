@@ -1,8 +1,6 @@
 <template>
   <UApp>
-    <AppLoader
-        v-if="showLoader"
-    />
+    <AppLoader v-if="showLoader" />
 
     <AppAuthErrorPage
         v-else-if="auth.error"
@@ -10,9 +8,19 @@
         @retry="retryAuth"
     />
 
+    <AppAuthErrorPage
+        v-else-if="hasError"
+    />
+
     <ClientOnly v-else>
       <NuxtLayout>
-        <NuxtPage/>
+        <div class="w-full overflow-hidden">
+          <div class="h-full w-full overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none]">
+            <div class="[&::-webkit-scrollbar]:hidden">
+              <NuxtPage />
+            </div>
+          </div>
+        </div>
       </NuxtLayout>
     </ClientOnly>
   </UApp>
@@ -20,11 +28,11 @@
 
 <script setup lang="ts">
 import { init } from '~/core/init'
-
 import './core/mockEnv.ts'
 
 const auth = useAuthStore()
 const isLoading = ref(true)
+const hasError = ref(false)
 
 const showLoader = computed(() => auth.loading || isLoading.value)
 
@@ -36,15 +44,6 @@ const retryAuth = async () => {
     isLoading.value = false
   }
 }
-
-watch(
-  () => auth.error,
-  (newVal, oldVal) => {
-    console.log('Error changed:', newVal)
-    console.log('Error oldVal:', oldVal)
-  },
-)
-
 const hasInitialized = ref(false)
 
 onMounted(async () => {
@@ -58,9 +57,21 @@ onMounted(async () => {
     await init()
     await auth.initialize()
   } catch (error) {
+    hasError.value = true
     console.error('Initialization failed:', error)
   } finally {
     isLoading.value = false
   }
 })
 </script>
+
+<style>
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Opera */
+}
+</style>
