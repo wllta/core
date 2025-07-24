@@ -8,7 +8,7 @@ import {
   miniApp,
   mountBackButton,
   mountSettingsButton,
-  mountThemeParamsSync,
+  mountThemeParamsSync, postEvent,
   restoreInitData,
   retrieveLaunchParams,
   setDebug,
@@ -79,9 +79,11 @@ export async function init(): Promise<void> {
 
   const bgColor = miniApp.isDark() ? '#242424' : '#ffeaa166'
 
-  miniApp.setBackgroundColor(bgColor)
-  miniApp.setHeaderColor(bgColor)
-  miniApp.setBottomBarColor(bgColor)
+  miniApp.setBackgroundColor.ifAvailable(bgColor)
+  miniApp.setHeaderColor.ifAvailable(bgColor)
+  miniApp.setBottomBarColor.ifAvailable(bgColor)
+
+  postEvent('web_app_request_fullscreen')
 
   const colorMode = useColorMode()
   colorMode.preference = miniApp.isDark() ? 'dark' : 'light'
