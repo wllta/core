@@ -5,5 +5,7 @@
   "rating": "Rating",
   "secret": "Secret",
   "loading": "App is loading...",
+  "settings.settings": "Settings",
+  "settings.language": "Language",
   "error.back_home": "Go home"
 }

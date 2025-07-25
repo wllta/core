@@ -29,6 +29,8 @@
 <script setup lang="ts">
 import { init } from '~/core/init'
 
+import './core/mockEnv.ts'
+
 const auth = useAuthStore()
 const isLoading = ref(true)
 const hasError = ref(false)

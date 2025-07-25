@@ -18,8 +18,6 @@ import {
 
 import { mockMacOs } from '~/core/mockMacOs'
 
-import './mockEnv.ts'
-
 /**
  * Initializes the application and configures its dependencies.
  */
@@ -41,7 +39,7 @@ export async function init(): Promise<void> {
   if (debug && ['ios', 'android'].includes(platform)) {
     void import('eruda').then(({ default: lib }) => {
       lib.init()
-      lib.position({ x: window.innerWidth - 50, y: 0 })
+      lib.position({ x: window.innerWidth - 50, y: 100 })
     })
   }
 
@@ -64,18 +62,17 @@ export async function init(): Promise<void> {
 
   mountThemeParamsSync.ifAvailable()
 
-  if (miniApp.isSupported() && !miniApp.isMounted()) {
-    miniApp.mountSync()
-  }
+  miniApp.mountSync.ifAvailable()
 
   const [viewportMounted, data] = viewport.mount.ifAvailable()
-  await data
 
   if (viewportMounted) {
     try {
-     await viewport.requestFullscreen()
+      if (viewport.requestFullscreen.isAvailable()) {
+        await data
+        viewport.requestFullscreen.ifAvailable()
+      }
     } catch (e) {
-      // alert(e)
       console.error('requestFullscreen: ', e)
     }
 

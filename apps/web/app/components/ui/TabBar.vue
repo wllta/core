@@ -41,7 +41,7 @@ const localePath = useLocalePath()
 
 const tabs = [
   { nameKey: 'overview', route: '/', icon: 'i-heroicons-home' },
-  { nameKey: 'analytics', route: '/analyticss', icon: 'i-heroicons-chart-bar' },
+  { nameKey: 'analytics', route: '/analytics', icon: 'i-heroicons-chart-bar' },
   {
     nameKey: 'transactions',
     route: '/transactions',

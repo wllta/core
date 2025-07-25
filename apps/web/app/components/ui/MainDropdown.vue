@@ -1,55 +1,37 @@
 <script setup lang="ts">
 import type { DropdownMenuItem } from '@nuxt/ui'
 import { useI18n } from 'vue-i18n'
+import { openLink } from '@telegram-apps/sdk'
 
-const { locale, setLocale, t } = useI18n()
+import { GITHUB_PROJECT_URL } from '~/config/constants/urls'
 
-interface Locale {
-  code: 'en' | 'ru'
-  label: string
-}
+const { t, locale, locales, setLocale } = useI18n()
 
-const availableLocales: Locale[] = [
-  { code: 'en', label: 'English' },
-  { code: 'ru', label: 'Русский' },
-]
-
-const switchLocale = (code: 'ru' | 'en') => {
-  if (locale.value !== code) {
-    setLocale(code)
-  }
-}
-
-const languageChildren: DropdownMenuItem[][] = [
-  availableLocales.map((lang) => ({
-    label: lang.label,
-    icon: locale.value === lang.code ? 'i-heroicons-check' : undefined,
-    click: () => switchLocale(lang.code),
-  })),
-]
-
-const items = computed<DropdownMenuItem[][]>(() => [
+const dropdownItems = computed<DropdownMenuItem[][]>(() => [
   [
     {
       label: t('settings.settings'),
       icon: 'i-lucide-cog',
-      click: () => navigateTo('/settings'),
+      onSelect: () => navigateTo('/settings'),
     },
-  ],
-  [
     {
       label: t('settings.language'),
-      icon: 'i-lucide-globe',
-      children: languageChildren,
-      trigger: 'click',
+      icon: 'i-lucide-languages',
+      children: locales.value.map((l) => ({
+        label: l.name,
+        onSelect: () => setLocale(l.code),
+        active: locale.value === l.code,
+      })),
     },
   ],
   [
     {
       label: 'GitHub',
       icon: 'i-simple-icons-github',
-      to: 'https://github.com/your-org/your-repo',
-      target: '_blank',
+      onSelect: () =>
+        openLink(GITHUB_PROJECT_URL, {
+          tryInstantView: true,
+        }),
     },
     {
       label: 'API',
@@ -61,7 +43,7 @@ const items = computed<DropdownMenuItem[][]>(() => [
 </script>
 
 <template>
-  <UDropdownMenu :items="items" :ui="{ content: 'w-64' }">
+  <UDropdownMenu :items="dropdownItems" :ui="{ content: 'w-64' }">
     <template #default>
       <UButton color="neutral" variant="ghost" class="p-2">
         <UIcon

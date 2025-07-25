@@ -23,9 +23,9 @@ export const useAuthStore = defineStore('auth', {
 
   actions: {
     async initialize(): Promise<void> {
-      if (!import.meta.client) {
-        return
-      }
+      // if (!import.meta.client) {
+      //   return
+      // }
 
       this.loading = true
       this.error = null

@@ -16,7 +16,6 @@ const props = withDefaults(
 
 const defaultText = t('loading')
 const loadingText = computed(() => (props.text ? props.text : defaultText))
-console.log('loadingText', loadingText.value)
 </script>
 
 <template>
