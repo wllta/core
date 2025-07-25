@@ -8,7 +8,7 @@ import {
   miniApp,
   mountBackButton,
   mountSettingsButton,
-  mountThemeParamsSync, postEvent,
+  mountThemeParamsSync,
   restoreInitData,
   retrieveLaunchParams,
   setDebug,
@@ -17,6 +17,8 @@ import {
 } from '@telegram-apps/sdk-vue'
 
 import { mockMacOs } from '~/core/mockMacOs'
+
+import './mockEnv.ts'
 
 /**
  * Initializes the application and configures its dependencies.
@@ -66,8 +68,17 @@ export async function init(): Promise<void> {
     miniApp.mountSync()
   }
 
-  const [viewportMounted] = viewport.mount.ifAvailable()
+  const [viewportMounted, data] = viewport.mount.ifAvailable()
+  await data
+
   if (viewportMounted) {
+    try {
+     await viewport.requestFullscreen()
+    } catch (e) {
+      // alert(e)
+      console.error('requestFullscreen: ', e)
+    }
+
     if (isViewportCssVarsBound()) {
       bindViewportCssVars()
     }
@@ -82,8 +93,6 @@ export async function init(): Promise<void> {
   miniApp.setBackgroundColor.ifAvailable(bgColor)
   miniApp.setHeaderColor.ifAvailable(bgColor)
   miniApp.setBottomBarColor.ifAvailable(bgColor)
-
-  postEvent('web_app_request_fullscreen')
 
   const colorMode = useColorMode()
   colorMode.preference = miniApp.isDark() ? 'dark' : 'light'
