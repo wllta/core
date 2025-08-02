@@ -1,17 +1,15 @@
 import { parse, validate } from '@telegram-apps/init-data-node'
+
 import bearer from '@elysiajs/bearer'
 import { Elysia } from 'elysia'
 
-import {
-  type TMAUser,
-  TMAUserSchema,
-  UnauthorizedError,
-} from '@wallet-analytic/shared'
+import { TMAUserSchema, UnauthorizedError } from '@wallet-analytic/shared'
+
+import { getUserByTelegramId } from '@services/user'
 
 import { env } from '../config/env'
 import { logger } from '../config/logger'
 import { AuthType } from '../constants'
-import { getUserByTelegramId } from '../services/user/user.get'
 
 export const AuthPlugin = new Elysia()
   .use(bearer())
