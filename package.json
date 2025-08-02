@@ -5,21 +5,20 @@
   "workspaces": ["apps/*", "packages/*"],
   "scripts": {
     "dev": "bunx concurrently -n web,api,bot -c blue,green,magenta \"bun run --filter=@wallet-analytic/web dev\" \"bun run --filter=@wallet-analytic/api dev\" \"bun run --filter=@wallet-analytic/bot dev\"",
-
+    "------- Docker -------": "-------",
     "docker:rebuild": "bunx docker compose -f docker-compose.dev.yml down && docker compose -f docker-compose.dev.yml build --no-cache && docker compose -f docker-compose.dev.yml up",
     "docker:rebuild:cached": "bunx docker compose -f docker-compose.dev.yml down && docker compose -f docker-compose.dev.yml build && docker compose -f docker-compose.dev.yml up",
-
+    "------- Build -------": "-------",
     "build:tsc": "tsc --build",
     "build": "bunx concurrently -n web,api,bot -c blue,green,magenta \"bun run --filter=@wallet-analytic/web build\" \"bun run --filter=@wallet-analytic/api build\" \"bun run --filter=@wallet-analytic/bot build\"",
-
+    "------- Test -------": "-------",
     "test": "bun test --recursive",
     "test:watch": "bun test --watch --recursive",
-
+    "------- DB -------": "-------",
     "db:generate": "bun run --filter=@wallet-analytic/api db:generate",
     "db:migrate": "bun run --filter=@wallet-analytic/api db:migrate",
-
+    "------- Format -------": "-------",
     "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules",
-
     "format": "biome format . --write"
   },
   "devDependencies": {

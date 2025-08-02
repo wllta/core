@@ -11,6 +11,6 @@
     ".": "./src/index.ts"
   },
   "dependencies": {
-    "zod": "^4.0.10"
+    "zod": "^4.0.14"
   }
 }
