@@ -5,12 +5,11 @@ export const isApiError = (error: unknown): error is ApiErrorWrapper => {
     return false
   }
 
-  const err = error as Record<string, unknown>
-  if (!('value' in err) || typeof err.value !== 'object') {
+  if (!('value' in error) || typeof error.value !== 'object') {
     return false
   }
 
-  const value = err.value as Record<string, unknown>
+  const value = error.value as Record<string, unknown>
   if (!('error' in value)) {
     return false
   }

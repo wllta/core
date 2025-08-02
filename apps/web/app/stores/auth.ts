@@ -7,7 +7,6 @@ import { client } from '~/shared/api'
 interface AuthState {
   user: TMAUser | null
   loading: boolean
-  initialized: boolean
   error: string | null
 }
 
@@ -16,7 +15,6 @@ export const useAuthStore = defineStore('auth', {
     user: null,
     loading: false,
     error: null,
-    initialized: false,
   }),
 
   getters: {
@@ -25,9 +23,9 @@ export const useAuthStore = defineStore('auth', {
 
   actions: {
     async initialize(): Promise<void> {
-      if (this.initialized || !import.meta.client) {
-        return
-      }
+      // if (!import.meta.client) {
+      //   return
+      // }
 
       this.loading = true
       this.error = null
@@ -44,7 +42,6 @@ export const useAuthStore = defineStore('auth', {
           err instanceof Error ? err.message : 'Unknown error occurred'
       } finally {
         this.loading = false
-        this.initialized = true
       }
     },
   },

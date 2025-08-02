@@ -12,6 +12,6 @@ export interface ApiErrorWrapper {
   value: ApiErrorResponse
 }
 
-export type ApiClientResponse<T = unknown> =
-  | { data: T; error?: never }
-  | { data?: never; error: ApiErrorWrapper }
+// export type ApiClientResponse<T = unknown> =
+//   | { data: T; error?: never }
+//   | { data?: never; error: ApiErrorWrapper }
