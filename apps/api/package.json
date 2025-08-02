@@ -3,11 +3,11 @@
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "biome format . --write",
-    "build:compile": "bun build src/index.ts --compile --minify --outfile server --target bun",
-    "build": "bun build src/index.ts --minify --outdir dist --target bun",
-    "dev": "bun run --watch src/index.ts",
-    "start": "bun run dist/index.js"
+    "format": "bun --bun biome format . --write",
+    "build:compile": "bun --bun  build src/index.ts --compile --minify --outfile server --target bun",
+    "build": "bun --bun  build src/index.ts --minify --outdir dist --target bun",
+    "dev": "bun --bun  run --watch src/index.ts",
+    "start": "bun --bun  run dist/index.js"
   },
   "exports": "./src/index.ts",
   "dependencies": {
@@ -25,8 +25,12 @@
     "@wallet-analytic/db": "workspace:*",
     "@wallet-analytic/shared": "workspace:*",
     "@wallet-analytic/ton-client": "workspace:*",
+    "drizzle-typebox": "^0.3.3",
     "elysia": "latest",
     "winston": "^3.17.0",
     "zod": "^4.0.14"
+  },
+  "overrides": {
+    "@sinclair/typebox": ">= 0.34.0"
   }
 }

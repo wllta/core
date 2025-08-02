@@ -7,6 +7,7 @@ const envSchema = z.object({
   WEB_APP_URL: z.url({
     protocol: /^http?$/,
   }),
+  IS_DEV: z.boolean(),
 })
 
 const envParsed = envSchema.safeParse({
@@ -14,6 +15,7 @@ const envParsed = envSchema.safeParse({
   APP_PORT: Bun.env.APP_PORT,
   WEB_APP_URL: Bun.env.WEB_APP_URL,
   BOT_TOKEN: Bun.env.BOT_TOKEN,
+  IS_DEV: Bun.env.NODE_ENV !== 'production',
 })
 
 if (!envParsed.success) {

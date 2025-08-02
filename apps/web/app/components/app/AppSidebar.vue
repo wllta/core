@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 
-import {assets} from "~/shared/assets";
+import { assets } from '~/shared/assets'
 
 const localePath = useLocalePath()
 

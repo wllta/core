@@ -3,9 +3,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "bun build src/index.ts --outdir dist --format esm",
-    "format": "biome format web --write",
-    "checkAll": "biome check web --write --unsafe"
+    "build": "bun --bun build src/index.ts --outdir dist --format esm",
+    "format": "bun --bun biome format . --write",
+    "checkAll": "bun --bun biome check . --write --unsafe"
   },
   "exports": {
     ".": "./src/index.ts"

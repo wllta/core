@@ -19,7 +19,7 @@
     "db:migrate": "bun run --filter=@wallet-analytic/api db:migrate",
     "------- Format -------": "-------",
     "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules",
-    "format": "biome format . --write"
+    "format": "bun --bun biome format . --write"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
