@@ -3,14 +3,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "bunx nuxt dev --host 0.0.0.0 --verbose",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "format": "biome format web --write",
-    "checkAll": "biome check web --write --unsafe",
-    "start": "bun --bun run next start"
+    "build": "bunx --bun nuxt build",
+    "dev": "bunx --bun nuxt dev --no-fork",
+    "generate": "bunx --bun nuxt generate",
+    "preview": "bunx --bun nuxt preview",
+    "postinstall": "bunx --bun nuxt prepare",
+    "format": "bunx --bun biome format web --write",
+    "checkAll": "bunx --bun biome check web --write --unsafe",
+    "start": "bunx --bun run next start"
   },
   "dependencies": {
     "@elysiajs/eden": "^1.3.2",

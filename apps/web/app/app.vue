@@ -14,9 +14,9 @@
 
     <ClientOnly v-else>
       <NuxtLayout>
-        <div class="w-full overflow-hidden">
+        <div class="w-full overflow-hidden h-full">
           <div class="h-full w-full overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none]">
-            <div class="[&::-webkit-scrollbar]:hidden">
+            <div class="[&::-webkit-scrollbar]:hidden h-full">
               <NuxtPage />
             </div>
           </div>
@@ -27,9 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { init } from '~/core/init'
-
-import './core/mockEnv.ts'
+import { init } from '~/core/tma/init'
 
 const auth = useAuthStore()
 const isLoading = ref(true)

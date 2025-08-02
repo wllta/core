@@ -16,7 +16,9 @@ import {
   viewport,
 } from '@telegram-apps/sdk-vue'
 
-import { mockMacOs } from '~/core/mockMacOs'
+import { mockMacOs } from './mockMacOs'
+
+import './mockEnv.ts'
 
 /**
  * Initializes the application and configures its dependencies.
@@ -85,7 +87,7 @@ export async function init(): Promise<void> {
     bindThemeParamsCssVars()
   }
 
-  const bgColor = miniApp.isDark() ? '#242424' : '#ffeaa166'
+  const bgColor = miniApp.isDark() ? '#242424' : '#ffeaa1'
 
   miniApp.setBackgroundColor.ifAvailable(bgColor)
   miniApp.setHeaderColor.ifAvailable(bgColor)

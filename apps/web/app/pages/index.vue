@@ -7,7 +7,7 @@ const goHome = () => {
 </script>
 
 <template>
-  <UiPage :back="true">
+  <UiPage :back="false">
     <div class="flex items-center justify-center">
       <UCard class="w-full max-w-md">
         <template #header>

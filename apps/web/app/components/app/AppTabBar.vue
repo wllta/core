@@ -2,7 +2,7 @@
   <div class="fixed bottom-4 left-0 right-0 flex justify-center z-50 px-4">
     <div class="relative bg-white dark:bg-[#242424] rounded-full shadow-xl h-20 flex items-center transition-all duration-300 max-w-sm w-full">
       <NuxtLink
-          v-for="(tab, index) in tabs"
+          v-for="(tab) in tabs"
           :key="tab.nameKey"
           :to="localePath(tab.route)"
           class="flex-1 flex flex-col items-center justify-center h-full relative group"
