@@ -14,12 +14,11 @@ export const loginModule = new Elysia()
   .get(
     '/login',
     async ({ user }) => {
-      console.log('asd', user)
       return user
     },
     {
       response: {
-        200: 'tma.user',
+        200: 'db.user',
         401: 'error.unauthorized',
         403: 'error.forbidden',
         422: 'error.validation',

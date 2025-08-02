@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {assets} from "~/shared/assets";
+import { assets } from '~/shared/assets'
 
 const { t } = useI18n()
 

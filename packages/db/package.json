@@ -1,13 +1,26 @@
 {
   "name": "@wallet-analytic/db",
-  "module": "./dist/index.js",
   "type": "module",
+  "module": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts"
   },
   "scripts": {
-    "build": "bun build src/index.ts --outdir dist --format esm",
-    "format": "biome format web --write",
-    "checkAll": "biome check web --write --unsafe"
+    "build": "bun --bun build src/index.ts --outdir dist --format esm",
+    "format": "bun --bun biome format . --write",
+    "checkAll": "bun --bun biome check . --write --unsafe",
+    "--- DB ---": "---",
+    "drizzle:generate": "bun --bun drizzle-kit generate",
+    "drizzle:push": "bun --bun drizzle-kit push",
+    "drizzle:pull": "bun --bun drizzle-kit pull",
+    "drizzle:status": "bun --bun drizzle-kit status"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.15.5",
+    "drizzle-kit": "^0.31.4"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.44.4",
+    "pg": "^8.16.3"
   }
 }

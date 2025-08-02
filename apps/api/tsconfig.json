@@ -3,7 +3,11 @@
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
-    "noEmit": false
+    "noEmit": false,
+    "baseUrl": "./src",
+    "paths": {
+      "@services/*": ["services/*"]
+    }
   },
   "include": ["src/**/*", "*.config.ts", "*.config.js"],
   "exclude": ["node_modules", "dist", "**/*.test.*", "**/*.spec.*"],
