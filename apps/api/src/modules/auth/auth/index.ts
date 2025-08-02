@@ -14,7 +14,6 @@ export const loginModule = new Elysia()
   .get(
     '/login',
     async ({ user }) => {
-      console.log('[loginModule] user:', user)
       return user
     },
     {
