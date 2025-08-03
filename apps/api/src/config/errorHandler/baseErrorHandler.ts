@@ -51,12 +51,10 @@ export const baseErrorHandler = (
   logger.error(apiError)
 
   return {
-    error: {
-      status: apiError.status,
-      code: apiError.code,
-      message: apiError.message,
-      ...(apiError.details ? { details: apiError.details } : {}),
-      ...(isDev && apiError.stack ? { stack: apiError.stack } : {}),
-    },
+    status: apiError.status,
+    code: apiError.code,
+    message: apiError.message,
+    ...(apiError.details ? { details: apiError.details } : {}),
+    ...(isDev && apiError.stack ? { stack: apiError.stack } : {}),
   }
 }

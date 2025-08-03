@@ -52,12 +52,12 @@ if (import.meta.env.DEV && import.meta.client) {
         //
         // Note that to make sure, you are using a valid init data, you must pass it exactly as it
         // is sent from the Telegram application. The reason is in case you will sort its keys
-        // (auth_date, hash, user, etc.) or values your own way, init data validation will more
+        // (auth_date, hash, models, etc.) or values your own way, init data validation will more
         // likely to fail on your server side. So, to make sure you are working with a valid init
         // data, it is better to take a real one from your application and paste it here. It should
         // look something like this (a correctly encoded URL search params):
         // ```
-        // user=%7B%22id%22%3A279058397%2C%22first_name%22%3A%22Vladislav%22%2C%22last_name%22...
+        // models=%7B%22id%22%3A279058397%2C%22first_name%22%3A%22Vladislav%22%2C%22last_name%22...
         // ```
         // But in case you don't really need a valid init data, use this one:
         [

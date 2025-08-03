@@ -2,12 +2,10 @@
 // import type { ValueErrorIterator } from '@sinclair/typebox/compiler'
 
 export interface ErrorResponse {
-  error: {
-    status: number
-    code: string
-    message: string
-    details?: unknown
-  }
+  status: number
+  code: string
+  message: string
+  details?: unknown
 }
 
 // export interface ValidationErrorDetail {

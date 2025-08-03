@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "drizzle-orm": "^0.44.4",
+    "drizzle-typebox": "^0.3.3",
     "pg": "^8.16.3"
   }
 }

@@ -8,6 +8,17 @@ export class ApiError extends Error {
     super(message)
     this.name = this.constructor.name
   }
+  //
+  // toJSON() {
+  //   return {
+  //     name: this.name,
+  //     message: this.message,
+  //     status: this.status,
+  //     code: this.code,
+  //     ...(this.details ? { details: this.details } : {}),
+  //     ...(Bun.env.NODE_ENV && this.stack ? { stack: this.stack } : {}),
+  //   }
+  // }
 }
 
 export class UnauthorizedError extends ApiError {
