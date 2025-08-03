@@ -4,15 +4,13 @@ import type { ValidationErrorResponse } from '../../errors'
 
 export const handleValidationError = (
   error: Readonly<ValidationError>,
-): { error: ValidationErrorResponse } => {
+): ValidationErrorResponse => {
   if (!Array.isArray(error?.all)) {
     return {
-      error: {
-        status: 422,
-        code: 'VALIDATION_ERROR',
-        message: 'Validation failed',
-        errors: [],
-      },
+      status: 422,
+      code: 'VALIDATION_ERROR',
+      message: 'Validation failed',
+      errors: [],
     }
   }
 
@@ -35,11 +33,9 @@ export const handleValidationError = (
   })
 
   return {
-    error: {
-      status: 422,
-      code: 'VALIDATION_ERROR',
-      message: 'Validation failed',
-      errors: errorList,
-    },
+    status: 422,
+    code: 'VALIDATION_ERROR',
+    message: 'Validation failed',
+    errors: errorList,
   }
 }

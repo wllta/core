@@ -1,13 +1,14 @@
 import { defineStore } from 'pinia'
 
-import { type TMAUser } from '@wallet-analytic/shared'
+import type { DBUser } from '@wallet-analytic/db'
+import { type ErrorResponse } from '@wallet-analytic/shared'
 
 import { client } from '~/shared/api'
 
 interface AuthState {
-  user: TMAUser | null
+  user: DBUser | null
   loading: boolean
-  error: string | null
+  error: ErrorResponse | null
 }
 
 export const useAuthStore = defineStore('auth', {
@@ -23,23 +24,24 @@ export const useAuthStore = defineStore('auth', {
 
   actions: {
     async initialize(): Promise<void> {
-      // if (!import.meta.client) {
-      //   return
-      // }
+      if (!import.meta.client) {
+        return
+      }
 
       this.loading = true
       this.error = null
 
       try {
-        await new Promise((resolve) => setTimeout(resolve, 3_000))
-        const { data: user } = await client.auth.login.get()
+        const { data: user, error } = await client.auth.login.get()
+
+        if (error) {
+          this.error = error.value
+          return
+        }
 
         if (user) {
           this.user = user
         }
-      } catch (err) {
-        this.error =
-          err instanceof Error ? err.message : 'Unknown error occurred'
       } finally {
         this.loading = false
       }

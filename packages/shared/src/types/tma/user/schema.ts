@@ -1,6 +1,8 @@
 import * as z from 'zod/mini'
 
-export const TMAUserSchema = z.object({
+// This schema is used to validate the user data received from Telegram Mini Apps
+// But it duplicates the TMAUser type from API
+export const TMAUserZodSchema = z.object({
   id: z.number(),
   firstName: z.string(),
 
@@ -16,4 +18,4 @@ export const TMAUserSchema = z.object({
   addedToAttachmentMenu: z.optional(z.boolean()),
 })
 
-export type TMAUser = z.infer<typeof TMAUserSchema>
+export type TMAUserZod = z.infer<typeof TMAUserZodSchema>

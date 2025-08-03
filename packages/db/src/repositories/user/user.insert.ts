@@ -1,5 +1,5 @@
 import { eq } from 'drizzle-orm'
-import { NotFoundError, type TMAUser } from '@wallet-analytic/shared'
+import { NotFoundError, type TMAUserZod } from '@wallet-analytic/shared'
 
 import { type DBUser, users } from '../../models'
 
@@ -7,7 +7,7 @@ import type { UserRepository } from './index'
 
 export async function getOrCreateByTelegramId(
   this: UserRepository,
-  tmaUser: TMAUser,
+  tmaUser: TMAUserZod,
 ): Promise<DBUser> {
   const [user] = await this.db
     .insert(users)
@@ -15,14 +15,14 @@ export async function getOrCreateByTelegramId(
       id: Bun.randomUUIDv7(),
       telegramId: tmaUser.id,
       firstName: tmaUser.firstName,
-      lastName: tmaUser.lastName ?? null,
-      username: tmaUser.username ?? null,
-      languageCode: tmaUser.languageCode ?? null,
-      isBot: tmaUser.isBot ?? null,
-      isPremium: tmaUser.isPremium ?? null,
-      allowsWriteToPm: tmaUser.allowsWriteToPm ?? null,
-      addedToAttachmentMenu: tmaUser.addedToAttachmentMenu ?? null,
-      photoUrl: tmaUser.photoUrl ?? null,
+      lastName: tmaUser.lastName,
+      username: tmaUser.username,
+      languageCode: tmaUser.languageCode,
+      isBot: tmaUser.isBot,
+      isPremium: tmaUser.isPremium,
+      allowsWriteToPm: tmaUser.allowsWriteToPm,
+      addedToAttachmentMenu: tmaUser.addedToAttachmentMenu,
+      photoUrl: tmaUser.photoUrl,
     })
     .onConflictDoNothing()
     .returning()

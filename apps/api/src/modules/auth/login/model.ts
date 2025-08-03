@@ -1,9 +1,8 @@
 import { Elysia /** type Static */ } from 'elysia'
 
-import { DBUserModel, TMAUserModel } from '@services/user'
+import { DBUserModel } from '../../user'
 
 export const LoginModels = new Elysia().model({
-  'tma.user': TMAUserModel,
   'db.user': DBUserModel,
 })
 

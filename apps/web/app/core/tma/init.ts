@@ -67,13 +67,11 @@ export async function init(): Promise<void> {
   miniApp.mountSync.ifAvailable()
 
   const [viewportMounted, data] = viewport.mount.ifAvailable()
+  await data
 
   if (viewportMounted) {
     try {
-      if (viewport.requestFullscreen.isAvailable()) {
-        await data
-        viewport.requestFullscreen.ifAvailable()
-      }
+      viewport.requestFullscreen.ifAvailable()
     } catch (e) {
       console.error('requestFullscreen: ', e)
     }

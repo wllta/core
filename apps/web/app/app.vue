@@ -4,7 +4,7 @@
 
     <AppAuthErrorPage
         v-else-if="auth.error"
-        :error="auth.error"
+        :error="auth.error.message"
         @retry="retryAuth"
     />
 

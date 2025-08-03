@@ -6,7 +6,7 @@
     "noEmit": false,
     "baseUrl": "./src",
     "paths": {
-      "@services/*": ["services/*"]
+      "@models/*": ["models/*"]
     }
   },
   "include": ["src/**/*", "*.config.ts", "*.config.js"],

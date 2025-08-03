@@ -3,9 +3,12 @@ import {
   boolean,
   pgTable,
   text,
+  timestamp,
   uuid,
   varchar,
 } from 'drizzle-orm/pg-core'
+
+import { createSelectSchema, createUpdateSchema } from 'drizzle-typebox'
 
 export const users = pgTable('users', {
   id: uuid('id').primaryKey(),
@@ -22,4 +25,8 @@ export const users = pgTable('users', {
   username: varchar('username', { length: 128 }),
   languageCode: varchar('language_code', { length: 16 }),
   photoUrl: text('photo_url'),
+  createdAt: timestamp('created_at', { mode: 'date' }).defaultNow().notNull(),
 })
+
+const userSelectSchema = createSelectSchema(users)
+const userUpdateSchema = createUpdateSchema(users)

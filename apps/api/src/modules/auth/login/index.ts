@@ -14,18 +14,23 @@ export const loginModule = new Elysia()
   .get(
     '/login',
     async ({ user }) => {
+      console.log('user', user)
       return user
     },
     {
       response: {
         200: 'db.user',
         401: 'error.unauthorized',
-        403: 'error.forbidden',
         422: 'error.validation',
         500: 'error.internal',
       },
       detail: {
-        tags: ['Auth'],
+        tags: ['Login'],
+        description: 'Returns all needed data for user auth',
+        externalDocs: {
+          description: 'Telegram mini apps docs',
+          url: 'https://docs.telegram-mini-apps.com/packages/telegram-apps-init-data-node/2-x',
+        },
       },
     },
   )
