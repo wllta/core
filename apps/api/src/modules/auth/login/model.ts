@@ -1,9 +1,7 @@
-import { Elysia /** type Static */ } from 'elysia'
+import { Elysia } from 'elysia'
 
-import { DBUserModel } from '../../user'
+import { DBUserSelectModel } from '@wallet-analytic/db'
 
 export const LoginModels = new Elysia().model({
-  'db.user': DBUserModel,
+  'db.user': DBUserSelectModel,
 })
-
-// export type TMAUser = Static<typeof TMAUserModel>
