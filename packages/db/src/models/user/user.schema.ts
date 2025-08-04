@@ -28,5 +28,8 @@ export const users = pgTable('users', {
   createdAt: timestamp('created_at', { mode: 'date' }).defaultNow().notNull(),
 })
 
-const userSelectSchema = createSelectSchema(users)
-const userUpdateSchema = createUpdateSchema(users)
+export const DBUserSelectModel = createSelectSchema(users)
+export type DBUserSelectModel = typeof DBUserSelectModel.static
+
+export const DBUserUpdateModel = createUpdateSchema(users)
+export type DBUserUpdateModel = typeof DBUserUpdateModel.static
