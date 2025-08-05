@@ -1,1 +1,4 @@
 preload = ["./src/plugins/openTelemetry.ts"]
+
+[test]
+coverage = true

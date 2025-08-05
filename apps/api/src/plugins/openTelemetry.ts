@@ -7,7 +7,7 @@ import { PeriodicExportingMetricReader } from '@opentelemetry/sdk-metrics'
 import { PgInstrumentation } from '@opentelemetry/instrumentation-pg'
 import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-node'
 
-import { env } from '../config/env'
+import { env } from '@config/env'
 
 const metricReader = new PeriodicExportingMetricReader({
   exporter: new OTLPMetricExporter(),

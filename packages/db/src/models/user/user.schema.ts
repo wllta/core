@@ -30,6 +30,7 @@ export const users = pgTable('users', {
   languageCode: varchar('language_code', { length: 16 }),
   photoUrl: text('photo_url'),
   createdAt: timestamp('created_at', { mode: 'date' }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { mode: 'date' }).defaultNow().notNull(),
 })
 
 export const DBUserSelectModel = createSelectSchema(users)

@@ -1,9 +1,9 @@
 import { Elysia } from 'elysia'
-// import { record } from '@elysiajs/opentelemetry'
 
-import { loggerPlugin } from '../../../config/logger'
-import { AuthPlugin } from '../../../middlewares/auth'
-import { ErrorModel } from '../../../errors'
+import { loggerPlugin } from '@config/logger'
+
+import { AuthPlugin } from '@middlewares/auth'
+import { ErrorModel } from '@errors/models'
 
 import { LoginModels } from './model'
 
@@ -15,14 +15,6 @@ export const loginModule = new Elysia()
   .get(
     '/login',
     async ({ user }) => {
-      // record('login.module', (span) => {
-      //   span.setAttributes({
-      //     'user.id': user.id,
-      //     'user.isBot': user.isBot ?? false,
-      //     'user.telegramId': user.telegramId,
-      //   })
-      // })
-
       console.log('db user', user)
       return user
     },

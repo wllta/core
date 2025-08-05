@@ -3,6 +3,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "test": "bun --bun test",
     "build": "bun --bun build src/index.ts --outdir dist --format esm",
     "format": "bun --bun biome format . --write",
     "checkAll": "bun --bun biome check . --write --unsafe"

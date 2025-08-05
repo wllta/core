@@ -5,11 +5,12 @@ import { Elysia } from 'elysia'
 
 import { TMAUserZodSchema, UnauthorizedError } from '@wallet-analytic/shared'
 
-import { env } from '../config/env'
-import { logger } from '../config/logger'
+import { env } from '@config/env'
+import { logger } from '@config/logger'
+
 import { AuthType } from '../constants'
 
-import { getUserByTelegramId } from '../modules/user'
+import { getUserByTelegramId } from '@modules/user'
 
 export const AuthPlugin = new Elysia()
   .use(bearer())

@@ -7,7 +7,7 @@ import {
   InternalServerError,
 } from '@wallet-analytic/shared'
 
-import { logger } from '../config/logger'
+import { logger } from '@config/logger'
 
 type ErrorCode =
   | number
