@@ -3,8 +3,8 @@ import { Elysia } from 'elysia'
 import { dbInstance } from '@wallet-analytic/db'
 
 import { corsPlugin, openTelemetryPlugin, swaggerPlugin } from './plugins'
+import { baseErrorHandler, handleValidationError } from './errorHandler'
 
-import { baseErrorHandler, handleValidationError } from './config/errorHandler'
 import { loggerPlugin } from './config/logger'
 import { env } from './config/env'
 

@@ -8,6 +8,9 @@ const envSchema = z.object({
     protocol: /^http?$/,
   }),
   IS_DEV: z.boolean(),
+  // Axiom
+  AXIOM_TOKEN: z.string(),
+  AXIOM_DATASET_NAME: z.string(),
 })
 
 const envParsed = envSchema.safeParse({
@@ -16,6 +19,8 @@ const envParsed = envSchema.safeParse({
   WEB_APP_URL: Bun.env.WEB_APP_URL,
   BOT_TOKEN: Bun.env.BOT_TOKEN,
   IS_DEV: Bun.env.NODE_ENV !== 'production',
+  AXIOM_TOKEN: Bun.env.AXIOM_TOKEN,
+  AXIOM_DATASET_NAME: Bun.env.AXIOM_DATASET_NAME,
 })
 
 if (!envParsed.success) {

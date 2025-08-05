@@ -8,7 +8,11 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core'
 
-import { createSelectSchema, createUpdateSchema } from 'drizzle-typebox'
+import {
+  createInsertSchema,
+  createSelectSchema,
+  createUpdateSchema,
+} from 'drizzle-typebox'
 
 export const users = pgTable('users', {
   id: uuid('id').primaryKey(),
@@ -33,3 +37,6 @@ export type DBUserSelectModel = typeof DBUserSelectModel.static
 
 export const DBUserUpdateModel = createUpdateSchema(users)
 export type DBUserUpdateModel = typeof DBUserUpdateModel.static
+
+export const DBUserInsertModel = createInsertSchema(users)
+export type DBUserInsertModel = typeof DBUserUpdateModel.static
