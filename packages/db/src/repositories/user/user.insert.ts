@@ -41,18 +41,18 @@ export async function getOrCreateByTelegramId(
     })
     .returning()
 
-  if (!user) {
-    const [existingUser] = await this.db
-      .select()
-      .from(users)
-      .where(eq(users.telegramId, tmaUser.id))
-      .limit(1)
-
-    if (!existingUser) {
-      throw new NotFoundError('User not found')
-    }
-    return existingUser
+  if (user) {
+    return user
   }
 
-  return user
+  const [existingUser] = await this.db
+    .select()
+    .from(users)
+    .where(eq(users.telegramId, tmaUser.id))
+    .limit(1)
+
+  if (!existingUser) {
+    throw new NotFoundError('User not found')
+  }
+  return existingUser
 }
