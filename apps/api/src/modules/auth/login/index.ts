@@ -1,8 +1,9 @@
 import { Elysia } from 'elysia'
 
-import { loggerPlugin } from '../../../config/logger'
-import { AuthPlugin } from '../../../middlewares/auth'
-import { ErrorModel } from '../../../errors'
+import { loggerPlugin } from '@config/logger'
+
+import { AuthPlugin } from '@middlewares/auth'
+import { ErrorModel } from '@errors/models'
 
 import { LoginModels } from './model'
 

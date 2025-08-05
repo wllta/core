@@ -5,17 +5,19 @@ import { Elysia } from 'elysia'
 
 import { TMAUserZodSchema, UnauthorizedError } from '@wallet-analytic/shared'
 
-import { env } from '../config/env'
-import { logger } from '../config/logger'
+import { env } from '@config/env'
+import { logger } from '@config/logger'
+
 import { AuthType } from '../constants'
 
-import { getUserByTelegramId } from '../modules/user'
+import { getUserByTelegramId } from '@modules/user'
 
 export const AuthPlugin = new Elysia()
   .use(bearer())
   .derive({ as: 'scoped' }, async ({ bearer }) => {
     if (!bearer) {
-      throw new UnauthorizedError('Auth token not found')
+      logger.error('Bearer not found')
+      throw new UnauthorizedError()
     }
 
     // https://docs.telegram-mini-apps.com/platform/authorizing-user
@@ -35,23 +37,25 @@ export const AuthPlugin = new Elysia()
 
           const user = parse(decodedAuthData, true).user
           if (!user?.id) {
-            throw new UnauthorizedError('Invalid models data (id)')
+            logger.error('Invalid models data (id)')
+            throw new UnauthorizedError()
           }
 
           const parsedUser = TMAUserZodSchema.safeParse(user)
           if (!parsedUser.success) {
-            throw new UnauthorizedError('Invalid models data')
+            logger.error('Invalid models data')
+            throw new UnauthorizedError()
           }
 
           return {
             user: await getUserByTelegramId(parsedUser.data),
           }
         } catch (error) {
-          logger.error(error)
-          throw new UnauthorizedError('Unknown login error')
+          logger.error('Error in catch', { error })
+          throw new UnauthorizedError()
         }
       default:
         logger.error('Unknown login type', authType)
-        throw new UnauthorizedError('Unknown login error')
+        throw new UnauthorizedError()
     }
   })

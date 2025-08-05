@@ -1,6 +1,6 @@
 import { ValidationError } from 'elysia'
 
-import type { ValidationErrorResponse } from '../../errors'
+import type { ValidationErrorResponse } from '../errors'
 
 export const handleValidationError = (
   error: Readonly<ValidationError>,

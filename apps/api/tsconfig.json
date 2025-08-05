@@ -1,16 +1,24 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "types": ["bun-types", "bun:test"],
     "outDir": "./dist",
     "rootDir": "./src",
     "noEmit": false,
     "baseUrl": "./src",
     "paths": {
-      "@models/*": ["models/*"]
+      "@root": ["index.ts"],
+      "@errors/*": ["errors/*"],
+      "@models/*": ["models/*"],
+      "@config/*": ["config/*"],
+      "@modules/*": ["modules/*"],
+      "@constants/*": ["constants/*"],
+      "@tests": ["__tests__/index.ts"],
+      "@middlewares/*": ["middlewares/*"]
     }
   },
   "include": ["src/**/*", "*.config.ts", "*.config.js"],
-  "exclude": ["node_modules", "dist", "**/*.test.*", "**/*.spec.*"],
+  "exclude": ["node_modules", "dist", "**/*.spec.*"],
   "references": [
     { "path": "../../packages/shared" },
     { "path": "../../packages/ton-client" },
