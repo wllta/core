@@ -4,7 +4,8 @@ on:
   push:
     paths:
       - 'apps/web/**'
-      - '.github/workflows/web.yml'
+      - 'packages/shared/**'
+      - '.github/workflows/build-web.yml'
 
 jobs:
   build:
@@ -15,7 +16,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: oven-sh/setup-bun@v1
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
 
       - name: Install dependencies
         run: bun install

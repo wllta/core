@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "test": "bun test",
     "dev": "bun --bun --watch ./src/main.ts",
     "format": "bun --bun biome format . --write",
     "build": "bun --bun  build src/main.ts --target=bun --outdir=dist --minify",
