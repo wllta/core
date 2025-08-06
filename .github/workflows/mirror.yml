@@ -26,7 +26,12 @@ jobs:
 
       - name: Rewrite ALL commit authors with git-filter-repo
         run: |
-          git filter-repo --replace-email '.*@.*'='scoffs@internet.ru' --replace-name '.*'='sf'
+          git filter-repo --force --commit-callback '
+            commit.author_name = b"sf"
+            commit.author_email = b"scoffs@internet.ru"
+            commit.committer_name = b"sf"
+            commit.committer_email = b"scoffs@internet.ru"
+          '
 
       - name: Push to GitVerse mirror
         run: |
