@@ -1,0 +1,24 @@
+name: Build All Packages
+
+on:
+  push:
+    paths:
+      - 'packages/**'
+      - '.github/workflows/build-packages.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: oven-sh/setup-bun@v1
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build all packages
+        run: bun run build:packages
