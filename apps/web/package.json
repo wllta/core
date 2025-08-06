@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test": "bun test",
     "build": "bunx --bun nuxt build",
     "dev": "bunx --bun nuxt dev --no-fork",
     "generate": "bunx --bun nuxt generate",

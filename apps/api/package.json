@@ -2,7 +2,7 @@
   "name": "@wallet-analytic/api",
   "version": "1.0.50",
   "scripts": {
-    "test": "bun --bun test",
+    "test": "bun test",
     "format": "bun --bun biome format . --write",
     "build:compile": "bun --bun  build src/index.ts --compile --minify --outfile server --target bun",
     "build": "bun --bun  build src/index.ts --minify --outdir dist --target bun",

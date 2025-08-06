@@ -4,7 +4,9 @@ on:
   push:
     paths:
       - 'apps/bot/**'
-      - '.github/workflows/bot.yml'
+      - 'packages/shared/**'
+      - 'packages/db/**'
+      - '.github/workflows/build-bot.yml'
 
 jobs:
   build:
@@ -15,7 +17,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: oven-sh/setup-bun@v1
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
 
       - name: Install dependencies
         run: bun install
