@@ -1,0 +1,42 @@
+name: Mirror to GitVerse
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set Git identity
+        run: |
+          git config --global user.name "sf"
+          git config --global user.email "scoffs@internet.ru"
+
+      - name: Rewrite ALL commit authors to uniform identity
+        run: |
+          git filter-branch -f --env-filter '
+            GIT_AUTHOR_NAME="sf"
+            GIT_AUTHOR_EMAIL="scoffs@internet.ru"
+            GIT_COMMITTER_NAME="sf"
+            GIT_COMMITTER_EMAIL="scoffs@internet.ru"
+            export GIT_AUTHOR_NAME
+            export GIT_AUTHOR_EMAIL
+            export GIT_COMMITTER_NAME
+            export GIT_COMMITTER_EMAIL
+          ' --tag-name-filter cat -- --all
+
+          git for-each-ref --format="delete %(refname)" refs/original/ | git update-ref --stdin || true
+          git reflog expire --expire=now --all
+          git gc --prune=now --aggressive
+
+      - name: Push to GitVerse mirror
+        run: |
+          git remote remove gitverse 2>/dev/null || true
+          git remote add gitverse https://${{ secrets.GITVERSE_USER }}:${{ secrets.GITVERSE_TOKEN }}@gitverse.ru/wl/core.git
+          git push gitverse --mirror --force
