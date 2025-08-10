@@ -24,7 +24,6 @@ export const baseErrorHandler = (
 ): ErrorResponse => {
   const isDev = process.env.NODE_ENV === 'development'
   let apiError: ApiError
-  console.log('code', code)
 
   // todo: add better type check and handler
 
