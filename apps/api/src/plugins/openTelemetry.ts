@@ -7,7 +7,7 @@ import { PeriodicExportingMetricReader } from '@opentelemetry/sdk-metrics'
 import { PgInstrumentation } from '@opentelemetry/instrumentation-pg'
 import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-node'
 
-import { env } from '@config/env'
+// import { env } from '@config/env'
 
 const metricReader = new PeriodicExportingMetricReader({
   exporter: new OTLPMetricExporter(),
@@ -21,13 +21,15 @@ export const openTelemetryPlugin = new Elysia({
     instrumentations: [new PgInstrumentation()],
     spanProcessors: [
       new BatchSpanProcessor(
-        new OTLPTraceExporter({
-          url: 'https://api.axiom.co/v1/traces',
-          headers: {
-            Authorization: `Bearer ${env.AXIOM_TOKEN}`,
-            'X-Axiom-Dataset': env.AXIOM_DATASET_NAME,
-          },
-        }),
+        new OTLPTraceExporter(
+          // {
+          //   url: 'https://api.axiom.co/v1/traces',
+          //   headers: {
+          //     Authorization: `Bearer ${env.AXIOM_TOKEN}`,
+          //     'X-Axiom-Dataset': env.AXIOM_DATASET_NAME,
+          //   },
+          // }
+        ),
       ),
     ],
     metricReader,
