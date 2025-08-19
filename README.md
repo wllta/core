@@ -12,6 +12,13 @@ bun i
 
 #### 🔧 Run Containers
 
+Stop and then start all
+
+```bash
+docker-compose -f docker-compose.dev.yml -f docker-compose.dev.db.yml down
+docker-compose -f docker-compose.dev.yml -f docker-compose.dev.db.yml up --build
+```
+
 Start and build containers from scratch (removing volumes and local images):
 
 ```bash
