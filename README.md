@@ -2,6 +2,12 @@
 
 ## Development
 
+### Dependencies
+
+```bash
+bun i
+```
+
 ### Docker
 
 #### 🔧 Run Containers
